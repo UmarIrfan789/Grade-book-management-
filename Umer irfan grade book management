@@ -1,0 +1,45 @@
+class GradeBook:
+    def __init__(self):
+        self.teachers = {}
+        self.results = {}
+
+    def add_teacher(self, teacher_id, name):
+        self.teachers[teacher_id] = name
+
+    def upload_results(self, teacher_id, student_id, subject, score):
+        key = (teacher_id, student_id, subject)
+        if key not in self.results:
+            self.results[key] = score
+            return "Results uploaded successfully."
+        else:
+            return "Results already exist for this student and subject."
+
+    def approve_results(self, teacher_id, student_id, subject):
+        key = (teacher_id, student_id, subject)
+        if key in self.results:
+            # Additional logic for confirmation or approval process
+            return "Results approved successfully."
+        else:
+            return "Results not found for approval."
+
+    def get_teacher_names(self):
+        return self.teachers.values()
+
+
+# Example Usage:
+grade_book = GradeBook()
+
+# Add teachers
+grade_book.add_teacher("T1", "Teacher 1")
+grade_book.add_teacher("T2", "Teacher 2")
+
+# Upload results
+print(grade_book.upload_results("T1", "S1", "Math", 90))
+print(grade_book.upload_results("T2", "S1", "Math", 85))
+
+# Approve results
+print(grade_book.approve_results("T1", "S1", "Math"))
+print(grade_book.approve_results("T2", "S1", "Math"))
+
+# Get teacher names
+print(grade_book.get_teacher_names())
